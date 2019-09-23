@@ -36,7 +36,7 @@ Everything that you use in R has a name: variables (including datasets), functio
 
 **Some Notes**:
 
-- '#' is the _________ (EXERCISE) sign. It tells R that everything that follows is a comment and R should ignore it. Comments are there to help explain parts of the code that need additional documentation. We will overuse them initially, but reduce this as the course proceeds.
+- '#' is the "Comment" (EXERCISE) sign. It tells R that everything that follows is a comment and R should ignore it. Comments are there to help explain parts of the code that need additional documentation. We will overuse them initially, but reduce this as the course proceeds.
 - c, "c", and "C" are not the same things
 - Naming conventions: When you name variables and functions, you should use snake case.
 
@@ -44,29 +44,43 @@ Everything that you use in R has a name: variables (including datasets), functio
 
 ```{r, exercise1, eval=FALSE}
 3         # -> 3
-7 %% 3    # -> ?
-False     # -> ?
-'pi'      # -> ?
-FALSE     # -> ?
+7 %% 3    # -> 1
+False     # -> Error: object 'False' not found
+'pi'      # -> "pi"
+FALSE     # -> FALSE
 ```
 
 **Exercise:** Look up what 'snake case' is and add your answer here.
 
+Snake case is a special writing convention commonly used in computer programming. When using snake case, variable and/or function names consisting of multiple words are combined by replacing the spaces between them with underscores for example "Toyota_corolla" or "honda_civic". 
+
 **Exercise:** What types of names are allowed in R? Look it up and write your answer here as you understand it. Then provide 3 examples of things that are not valid names in R for different reasons. 
+
+Every R user is required to create syntactically valid names in R i.e names that can be understood by the R interpreter. To start off, there is generally alot of freedom when naming objects in R and the general rule observed is that you can name an object literally anything from a combination of letters, numbers and the dot or underline characters except for the defined restrictions. Invalid naming conventionsin R include:
+
+* Names starting with a dot followed by a number for example ".007Bond"
+* Naming objects using the reserved words in R. Reserved words include: if, else, repeat, while, function, for, in, next, break, TRUE, FALSE, NULL, Inf, NaN, NA, NA_integer_, NA_real_, NA_complex_, NA_character_, ..., ..1, ..2 etc.
+
+When encoutered with a conflict, the R interpreter may take one or more of the following action(s):
+
+* All invalid characters are translated to "."
+* A missing value is translated to "NA"
+* Names which match R keywords have a dot appended to them
+* Duplicated values are altered by make.unique
 
 #### Everything is an object
 
 There are built-in objects and objects you import or create. Most importantly, you assign values to objects you create with the '<-' operator: a '<' ('less than') followed by a '-' ('minus' or 'dash').
 
 ```{r, assignment, eval=FALSE}
-marcs_new_object <- ...
+marcs_new_object <- 'I love lamborghinis'
 marcs_new_object
 ```
 
 One important function to create objects is the $c()$ function, which combines several items into one objects:
 
 ```{r, eval=FALSE}
-marcs_new_combined_object <- c(...)
+marcs_new_combined_object <- c(marcs_new_object, 'Luckily I own a Gallardo', 'and an Aventador!')
 marcs_new_combined_object
 ```
 
@@ -102,15 +116,18 @@ languages_heard_of <- c(11)
 A function is a special object that you can call, such as the function $mean$. It is an object:
 
 ```{r}
-mean
+mean(c(1,10))
 ```
 
 When we *call* it, we put parentheses at the end, and we tell it what to perform its action on:
 
 ```{r mean_means}
+mean(languages_heard_of)
 ```
 
 **Exercise:** What happens if you call the function $mean$ without any arguments, i.e. $mean()$?
+
+By calling mean without any arguemtns we get an error stating that the argument is missing with no defaults set.
 
 #### Functions come in packages
 
@@ -122,6 +139,8 @@ ggplot
 You will get an error. We first need to import the library:
 
 ```{r}
+library(ggplot2)
+ggplot()
 ```
 
 This tells R to go and get all the objects defined in the library called ggplot2, which includes *ggplot*. This gives us our first data (non-)visualization: a beautifully empty plot. 
@@ -139,13 +158,21 @@ x <- c(1, 3.0, 2.9)
 For built-in functions, you can also ask for help or bring up the documentation with 'help()' or '?' or '??':
 
 ```{r, what_is_summary}
+?summary()
 ```
 
 **Exercise:** What do 'class()' and 'str()' do? Use 'help' (or '?'). Don't spend too much time reading the docs. Which description do you find more helpful?
 
+class() is a funtion that is employed to practise the object oriented style of programming. It creates vectors of values or characters to define datasets that require processing. 
+
+str() is used to display the internal structure of an object much like summary does but in a more compact manner. It does this by only displaying one line for each basic structure.
+
+
 ### Make Your First Figure
 
 ```{r, gapminder}
+library(gapminder)
+plot(gapminder$gdpPercap, gapminder$lifeExp)
 ```
 
 As you can see, some datasets are conveniently bundled for you as libraries.
@@ -187,6 +214,15 @@ Track as many error messages as possible that you made during this week (stop on
 # -> Error in "4" - "3" : non-numeric argument to binary operator
 
 # Your examples below
+
+First error was trying to load the gapminder library. I had installed it before in class as well but i dont know why i had to install it again using the install.packages() function.
+
+Another error i faced was while i was installing the gapminder library. I used the install.packages(gapminder) function but forgot to add the quotation marks around gapminder so I again tried with install.packages("gapminder") and it worked.
+
+I was already aware of the knitting problems everybody was facing and with a little research on Discourse (Thanks to Faaez) I knew that the 'Always install missing packages on-the-fly' needs to be ticked from the settings tab. For me, while I was installing MikTex for the frist time, it prompted itself about the option regarding the missing packages, and I chose the correct option. Because of this I solved the pdf knitting error without ever facing it. 
+
+I have yet to face a fourth error to complete this list, perhaps with more coding more errors will pop up with time.
+
 ```
 
 Post one of these 4 errors on discourse.
