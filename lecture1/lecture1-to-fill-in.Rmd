@@ -153,6 +153,7 @@ Suppose you have an object $x$ that you don't know what it is. You can do a few 
 
 ```{r, what_is_x}
 x <- c(1, 3.0, 2.9)
+class(x)
 ```
 
 For built-in functions, you can also ask for help or bring up the documentation with 'help()' or '?' or '??':
